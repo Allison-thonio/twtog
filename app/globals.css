@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Updated color palette for TWT brand - Deep Brown & Cream Elegance */
+    /* TWT brand - Deep Brown & Cream Elegance (Rich Mocha) */
     --background: oklch(0.35 0.08 45);
     /* Rich Dark Mocha #5C4033 */
     --foreground: oklch(0.95 0.03 60);
