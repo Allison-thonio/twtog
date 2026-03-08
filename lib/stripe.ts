@@ -1,10 +1,8 @@
 import Stripe from 'stripe'
 
-const stripeKey = process.env.STRIPE_SECRET_KEY || '';
-
-if (!stripeKey) {
-    console.warn("STRIPE_SECRET_KEY is missing. Stripe functionality will be unavailable.");
-}
+// We use a dummy key for build-time compatibility to prevent the Stripe 
+// constructor from throwing an error during Next.js static analysis.
+const stripeKey = process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder';
 
 export const stripe = new Stripe(stripeKey, {
     // @ts-ignore - Bypass version literal type mismatch

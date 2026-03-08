@@ -11,6 +11,8 @@ import Navbar from "../../components/navbar"
 import Footer from "../../components/footer"
 import { Filter, Grid, List } from "lucide-react"
 
+import { fetchProducts } from "@/app/actions"
+
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [priceRange, setPriceRange] = useState<string>("all")
@@ -20,8 +22,11 @@ export default function ShopPage() {
   const [showFilters, setShowFilters] = useState(false)
 
   useEffect(() => {
-    const savedProducts = JSON.parse(localStorage.getItem("adminProducts") || "[]")
-    setProducts(savedProducts)
+    const loadData = async () => {
+      const data = await fetchProducts()
+      setProducts(data || [])
+    }
+    loadData()
   }, [])
 
   // Filter products based on selected filters
@@ -74,14 +79,14 @@ export default function ShopPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-stone-50">
+      <div className="min-h-screen bg-background">
         {/* Main shop content */}
-        <div className="bg-white py-12">
+        <div className="bg-background py-12">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
-              <h1 className="text-4xl font-light text-stone-900 mb-4 tracking-wide">Shop All</h1>
-              <p className="text-stone-600 max-w-2xl mx-auto leading-relaxed">
-                Discover our collection of thoughtfully designed, ethically made essentials.
+              <h1 className="text-4xl md:text-6xl font-light text-foreground mb-4 tracking-tighter">THE COLLECTION</h1>
+              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light italic">
+                "Thoughtfully designed, ethically made essentials for the modern soul."
               </p>
             </div>
             {/* Category Pills */}
@@ -94,11 +99,10 @@ export default function ShopPage() {
                 <button
                   key={category.key}
                   onClick={() => setSelectedCategory(category.key)}
-                  className={`px-6 py-2 text-sm tracking-wide transition-colors ${
-                    selectedCategory === category.key
-                      ? "text-stone-900 border-b-2 border-stone-900"
-                      : "text-stone-600 hover:text-stone-900"
-                  }`}
+                  className={`px-6 py-2 text-sm tracking-widest uppercase transition-colors ${selectedCategory === category.key
+                      ? "text-primary border-b-2 border-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   {category.label}
                 </button>
@@ -193,26 +197,26 @@ export default function ShopPage() {
                 <div key={product.id} className="group">
                   <Link href={`/product/${product.id}`}>
                     {viewMode === "grid" ? (
-                      <div className="bg-white">
-                        <div className="relative overflow-hidden bg-stone-100">
+                      <div className="bg-card/30 rounded-xl overflow-hidden border border-border/20">
+                        <div className="relative overflow-hidden bg-muted">
                           <img
                             src={product.image || "/placeholder.svg?height=400&width=300&text=Product"}
                             alt={product.name}
                             className="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
-                        <div className="py-4">
-                          <h3 className="font-light text-stone-900 mb-1 group-hover:text-stone-600 transition-colors">
+                        <div className="p-4 bg-card">
+                          <h3 className="font-light text-foreground mb-1 group-hover:text-primary transition-colors text-lg">
                             {product.name}
                           </h3>
-                          <p className="text-stone-600 text-sm">${product.price}</p>
+                          <p className="text-primary font-medium text-sm">${product.price}</p>
                           {product.category && (
-                            <p className="text-stone-400 text-xs mt-1 uppercase tracking-wide">{product.category}</p>
+                            <p className="text-muted-foreground text-[10px] mt-1 uppercase tracking-[0.2em]">{product.category}</p>
                           )}
                         </div>
                       </div>
                     ) : (
-                      <div className="flex gap-6 bg-white p-6 group-hover:bg-stone-50 transition-colors">
+                      <div className="flex gap-6 bg-card p-6 group-hover:bg-muted/30 transition-colors border border-border/20 rounded-xl">
                         <div className="w-32 h-40 bg-stone-100 overflow-hidden">
                           <img
                             src={product.image || "/placeholder.svg?height=160&width=128&text=Product"}

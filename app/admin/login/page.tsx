@@ -12,6 +12,8 @@ import Header from "@/components/header"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff, Mail, Lock } from "lucide-react"
 
+import { adminLogin } from "@/app/actions"
+
 export default function AdminLogin() {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
@@ -26,36 +28,22 @@ export default function AdminLogin() {
     setError("")
 
     try {
-      const adminCredentials = {
-        email: "twtog@mail.com",
-        password: "TWT",
-      }
+      const result = await adminLogin({
+        email: formData.email,
+        password: formData.password,
+        rememberMe: rememberMe
+      });
 
-      // compare email case-insensitively (emails are usually case-insensitive)
-      if (
-        formData.email.trim().toLowerCase() === adminCredentials.email.toLowerCase() &&
-        formData.password === adminCredentials.password
-      ) {
-        // Persist admin auth in localStorage so AdminAuthGuard recognizes it
-        const now = Date.now()
-        // If rememberMe, keep admin signed-in for 30 days, otherwise 2 hours
-        const expiresAt = now + (rememberMe ? 30 * 24 * 60 * 60 * 1000 : 2 * 60 * 60 * 1000)
-
-        localStorage.setItem(
-          "adminAuth",
-          JSON.stringify({ email: adminCredentials.email, role: "admin", loginTime: new Date().toISOString(), expiresAt })
-        )
-
-        // Set a session cookie via a server action (placeholder for actual security)
-        document.cookie = `admin_session=true; path=/; max-age=${rememberMe ? 30 * 24 * 60 * 60 : 2 * 60 * 60}; samesite=strict`;
-
+      if (result.success) {
+        // Redundant but keeps client-side guards happy if they don't check cookies
+        localStorage.setItem("adminAuth", JSON.stringify({ email: formData.email, role: "admin", timestamp: Date.now() }));
         router.push("/admin/dashboard")
         return
       }
 
-      setError("Invalid email or password")
+      setError(result.error || "Login failed")
     } catch (err) {
-      setError("Login failed. Please try again.")
+      setError("An unexpected error occurred")
     } finally {
       setIsLoading(false)
     }
