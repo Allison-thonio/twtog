@@ -407,6 +407,10 @@ export default function AdminDashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {[
                     { key: "hero1", label: "Homepage Hero Banner" },
+                    { key: "scroll1", label: "Hero Scroll - Image 1" },
+                    { key: "scroll2", label: "Hero Scroll - Image 2" },
+                    { key: "scroll3", label: "Hero Scroll - Image 3" },
+                    { key: "scroll4", label: "Hero Scroll - Image 4" },
                     { key: "stack1", label: "Intro Stack Card 1" },
                     { key: "stack2", label: "Intro Stack Card 2" },
                     { key: "stack3", label: "Intro Stack Card 3" },

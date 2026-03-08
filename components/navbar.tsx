@@ -21,31 +21,30 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-white border-b border-stone-200 sticky top-0 z-50">
+      <nav className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
 
             {/* Mobile Menu Trigger */}
             <div className="md:hidden flex items-center">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="mr-2">
-                    <Menu className="h-6 w-6" />
+                    <Menu className="h-6 w-6 text-foreground" />
                     <span className="sr-only">Open menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-                  <SheetHeader className="border-b pb-4 mb-4">
+                <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-background border-r border-border">
+                  <SheetHeader className="border-b border-border pb-4 mb-4">
                     <SheetTitle className="text-left">
                       <Link href="/" onClick={() => setIsOpen(false)} className="flex flex-col items-start">
-                        <span className="text-2xl font-light tracking-wide text-stone-900">TTTSL</span>
-                        <span className="swanky-brand text-xs leading-none text-stone-500">swanky by ellery</span>
+                        <span className="text-2xl font-light tracking-[0.2em] text-foreground">TWT</span>
                       </Link>
                     </SheetTitle>
                   </SheetHeader>
                   <div className="flex flex-col space-y-4">
                     {navLinks.map((link) => {
-                      const isActive = pathname === link.href || (link.href === '/shop' && pathname === '/')
+                      const isActive = pathname === link.href
                       return (
                         <Link
                           key={link.href}
@@ -53,19 +52,19 @@ const Navbar = () => {
                           onClick={() => setIsOpen(false)}
                           className={
                             isActive
-                              ? 'text-lg font-medium text-stone-900 border-l-2 border-stone-900 pl-4'
-                              : 'text-lg text-stone-600 hover:text-stone-900 transition-colors pl-4 border-l-2 border-transparent'
+                              ? 'text-lg font-medium text-primary border-l-2 border-primary pl-4'
+                              : 'text-lg text-muted-foreground hover:text-foreground transition-colors pl-4 border-l-2 border-transparent'
                           }
                         >
                           {link.label}
                         </Link>
                       )
                     })}
-                    <div className="pt-4 border-t border-stone-100 mt-4 space-y-4">
+                    <div className="pt-4 border-t border-border mt-4 space-y-4">
                       <Link
                         href="/auth/login"
                         onClick={() => setIsOpen(false)}
-                        className="flex items-center space-x-2 text-stone-600 hover:text-stone-900 pl-4"
+                        className="flex items-center space-x-2 text-muted-foreground hover:text-foreground pl-4"
                       >
                         <User2 className="w-5 h-5" />
                         <span>Account</span>
@@ -78,25 +77,24 @@ const Navbar = () => {
 
             {/* Logo */}
             <div className="flex items-center">
-              <Link href="/" className="text-2xl font-light tracking-wide text-stone-900 flex md:flex-row flex-col md:items-baseline items-center gap-1 md:gap-3">
-                <span>TTTSL</span>
-                <span className="swanky-brand text-sm leading-none hidden md:inline-block">swanky by ellery</span>
+              <Link href="/" className="text-2xl font-light tracking-[0.3em] text-foreground flex md:flex-row flex-col md:items-baseline items-center gap-1 md:gap-3">
+                <span>TWT</span>
               </Link>
             </div>
 
             {/* Desktop Nav */}
             <div className="hidden md:block">
-              <div className="flex items-center space-x-8">
+              <div className="flex items-center space-x-12">
                 {navLinks.map((link) => {
-                  const isActive = pathname === link.href || (link.href === '/shop' && pathname === '/')
+                  const isActive = pathname === link.href
                   return (
                     <Link
                       key={link.href}
                       href={link.href}
                       className={
                         isActive
-                          ? 'text-stone-900 font-medium border-b-2 border-stone-900 pb-1'
-                          : 'text-stone-600 swanky-link transition-colors text-sm tracking-wide'
+                          ? 'text-primary font-medium border-b border-primary pb-1 transition-all'
+                          : 'text-muted-foreground hover:text-foreground transition-all text-sm tracking-[0.1em]'
                       }
                     >
                       {link.label}
@@ -113,20 +111,20 @@ const Navbar = () => {
               </div>
               <div className="md:hidden">
                 <Button variant="ghost" size="icon">
-                  <Search className="w-5 h-5" />
+                  <Search className="w-5 h-5 text-foreground" />
                 </Button>
               </div>
 
               <Link
                 href="/auth/login"
-                className="text-stone-600 hover:text-stone-900 transition-colors hidden md:block"
+                className="text-muted-foreground hover:text-foreground transition-colors hidden md:block"
                 aria-label="Account"
               >
                 <User2 className="w-5 h-5" />
               </Link>
               <Link
                 href="/cart"
-                className="text-stone-600 hover:text-stone-900 transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Shopping Cart"
               >
                 <ShoppingCart className="w-5 h-5" />

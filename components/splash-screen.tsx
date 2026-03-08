@@ -13,7 +13,7 @@ interface SplashCard {
 
 const splashCards: SplashCard[] = [
   {
-    title: "Welcome to TTTSL",
+    title: "Welcome to TWT",
     description: "Your one-stop shop for amazing fashion",
     image: "/splash/welcome.jpg", // Add your image paths
   },
@@ -140,9 +140,8 @@ export default function SplashScreen() {
                   {splashCards.map((_, index) => (
                     <div
                       key={index}
-                      className={`h-2 rounded-full transition-all ${
-                        index === currentIndex ? "w-8 bg-primary" : "w-2 bg-muted"
-                      }`}
+                      className={`h-2 rounded-full transition-all ${index === currentIndex ? "w-8 bg-primary" : "w-2 bg-muted"
+                        }`}
                     />
                   ))}
                 </div>

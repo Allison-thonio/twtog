@@ -9,7 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
-  title: "TTTSL - Timeless Style, Transparent Values",
+  title: "TWT - Timeless Style, Transparent Values",
   description:
     "Discover ethically-made fashion that transcends trends. Every piece tells a story of craftsmanship and conscious creation.",
   generator: "v0.app",
