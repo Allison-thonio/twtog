@@ -75,7 +75,7 @@ export default function HomePage() {
             </div>
           </motion.div>
         </div>
-        
+
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 animate-bounce">
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-white"></div>
           <span className="text-[10px] tracking-[0.4em] text-white uppercase">Scroll</span>

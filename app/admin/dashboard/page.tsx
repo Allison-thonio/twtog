@@ -72,7 +72,7 @@ export default function AdminDashboard() {
     sku: "",
     specifications: {} as { [key: string]: string },
     image: null as File | null,
-    brand: "TTTSL",
+    brand: "TWT",
   })
   const [specKey, setSpecKey] = useState("")
   const [specValue, setSpecValue] = useState("")
@@ -211,7 +211,7 @@ export default function AdminDashboard() {
       sku: "",
       specifications: {},
       image: null,
-      brand: "TTTSL",
+      brand: "TWT",
     })
     setShowAddProduct(false)
   }
@@ -295,7 +295,9 @@ export default function AdminDashboard() {
           <div className="space-y-6 animate-in fade-in duration-500">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-3xl font-light tracking-tight">Products</h2>
+                <h2 className="text-3xl font-light tracking-tight">
+                  <span className="swanky-brand text-xl font-light tracking-[0.2em] text-foreground">TWT</span>
+                </h2>
                 <p className="text-muted-foreground">Manage your inventory and catalog.</p>
               </div>
               <Button onClick={() => setShowAddProduct(true)} className="bg-primary text-primary-foreground hover:bg-primary/90">
@@ -305,7 +307,7 @@ export default function AdminDashboard() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {products.map((product) => (
-                <Card key={product.id} className="overflow-hidden group hover:shadow-lg transition-all duration-300 border-border/50">
+                <Card key={product.id} className="overflow-hidden group hover:shadow-lg transition-all duration-300 border-border/50 bg-card">
                   <div className="aspect-square relative bg-muted/30 overflow-hidden">
                     {product.image ? (
                       <img src={product.image} alt={product.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" />
@@ -341,7 +343,7 @@ export default function AdminDashboard() {
                 </Card>
               ))}
               {products.length === 0 && (
-                <div className="col-span-full flex flex-col items-center justify-center py-12 text-muted-foreground border-2 border-dashed rounded-lg">
+                <div className="col-span-full flex flex-col items-center justify-center py-12 text-muted-foreground border-2 border-dashed rounded-lg bg-card">
                   <Package className="w-12 h-12 mb-4 opacity-20" />
                   <p>No products found. Start by adding one.</p>
                 </div>
@@ -354,7 +356,7 @@ export default function AdminDashboard() {
           <div className="space-y-6 animate-in fade-in duration-500">
             <h2 className="text-3xl font-light tracking-tight">Analytics</h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="col-span-4 border-border/50 shadow-sm">
+              <Card className="col-span-4 border-border/50 shadow-sm bg-card">
                 <CardHeader>
                   <CardTitle>Revenue Overview</CardTitle>
                   <CardDescription>Monthly revenue performance for the current year.</CardDescription>
@@ -380,7 +382,7 @@ export default function AdminDashboard() {
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
-              <Card className="col-span-3 border-border/50 shadow-sm">
+              <Card className="col-span-3 border-border/50 shadow-sm bg-card">
                 <CardHeader>
                   <CardTitle>Top Performing Categories</CardTitle>
                   <CardDescription>Distribution of sales by category.</CardDescription>
@@ -398,7 +400,7 @@ export default function AdminDashboard() {
         return (
           <div className="space-y-6 animate-in fade-in duration-500">
             <h2 className="text-3xl font-light tracking-tight">Site Assets</h2>
-            <Card className="border-border/50 shadow-sm">
+            <Card className="border-border/50 shadow-sm bg-card">
               <CardHeader>
                 <CardTitle>Global Images</CardTitle>
                 <CardDescription>Manage images used across the storefront (Hero, Banners, etc).</CardDescription>
@@ -447,7 +449,7 @@ export default function AdminDashboard() {
         return (
           <div className="space-y-6 animate-in fade-in duration-500">
             <h2 className="text-3xl font-light tracking-tight">Orders</h2>
-            <Card className="border-border/50 shadow-sm">
+            <Card className="border-border/50 shadow-sm bg-card">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
@@ -496,6 +498,12 @@ export default function AdminDashboard() {
           </div>
         )
       default: // Dashboard
+        const statsData = [
+          { label: "Total Revenue", value: formatAmount(stats.totalRevenue), icon: DollarSign, trend: "+20.1%" },
+          { label: "Active Products", value: stats.totalProducts, icon: Package, trend: "+12 new products" },
+          { label: "Total Orders", value: stats.totalOrders, icon: ShoppingCart, trend: "+19%" },
+          { label: "Active Customers", value: stats.totalCustomers, icon: Users, trend: "+201 since last hour" },
+        ]
         return (
           <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -520,56 +528,30 @@ export default function AdminDashboard() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Card className="border-border/50 shadow-sm hover:shadow-md transition-all">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Total Revenue</CardTitle>
-                  <DollarSign className="h-4 w-4 text-primary" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{formatAmount(stats.totalRevenue)}</div>
-                  <p className="text-xs text-muted-foreground mt-1 flex items-center">
-                    <TrendingUp className="w-3 h-3 mr-1 text-emerald-500" />
-                    <span className="text-emerald-500 font-medium">+20.1%</span> from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="border-border/50 shadow-sm hover:shadow-md transition-all">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Active Products</CardTitle>
-                  <Package className="h-4 w-4 text-primary" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{stats.totalProducts}</div>
-                  <p className="text-xs text-muted-foreground mt-1">+12 new products added</p>
-                </CardContent>
-              </Card>
-              <Card className="border-border/50 shadow-sm hover:shadow-md transition-all">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Total Orders</CardTitle>
-                  <ShoppingCart className="h-4 w-4 text-primary" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{stats.totalOrders}</div>
-                  <p className="text-xs text-muted-foreground mt-1 flex items-center">
-                    <TrendingUp className="w-3 h-3 mr-1 text-emerald-500" />
-                    <span className="text-emerald-500 font-medium">+19%</span> from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="border-border/50 shadow-sm hover:shadow-md transition-all">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Active Customers</CardTitle>
-                  <Users className="h-4 w-4 text-primary" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{stats.totalCustomers}</div>
-                  <p className="text-xs text-muted-foreground mt-1">+201 since last hour</p>
-                </CardContent>
-              </Card>
+              {statsData.map((stat, index) => (
+                <Card key={stat.label} className="border-border/50 bg-card overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
+                        <h3 className="text-3xl font-bold mt-1 text-foreground">{stat.value}</h3>
+                      </div>
+                      <div className={cn("p-3 rounded-xl bg-primary/10 text-primary border border-primary/20")}>
+                        <stat.icon size={24} />
+                      </div>
+                    </div>
+                    <div className="mt-4 flex items-center text-xs">
+                      <TrendingUp size={14} className="text-primary mr-1" />
+                      <span className="text-primary font-medium">{stat.trend}</span>
+                      <span className="text-muted-foreground ml-1">vs last month</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="col-span-4 border-border/50 shadow-sm">
+              <Card className="col-span-4 border-border/50 shadow-sm bg-card">
                 <CardHeader>
                   <CardTitle>Sales Overview</CardTitle>
                 </CardHeader>
@@ -587,7 +569,7 @@ export default function AdminDashboard() {
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
-              <Card className="col-span-3 border-border/50 shadow-sm">
+              <Card className="col-span-3 border-border/50 shadow-sm bg-card">
                 <CardHeader>
                   <CardTitle>Recent Activity</CardTitle>
                   <CardDescription>Latest actions on your store.</CardDescription>
@@ -640,7 +622,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto h-screen bg-muted/10">
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-background">
           <div className="max-w-7xl mx-auto">
             {renderContent()}
           </div>

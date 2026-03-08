@@ -27,8 +27,8 @@ export default function AdminLogin() {
 
     try {
       const adminCredentials = {
-        email: "ADMIN@TTTSL.COM",
-        password: "TTTSL@3023",
+        email: "twtog@mail.com",
+        password: "TWT",
       }
 
       // compare email case-insensitively (emails are usually case-insensitive)
@@ -45,6 +45,9 @@ export default function AdminLogin() {
           "adminAuth",
           JSON.stringify({ email: adminCredentials.email, role: "admin", loginTime: new Date().toISOString(), expiresAt })
         )
+
+        // Set a session cookie via a server action (placeholder for actual security)
+        document.cookie = `admin_session=true; path=/; max-age=${rememberMe ? 30 * 24 * 60 * 60 : 2 * 60 * 60}; samesite=strict`;
 
         router.push("/admin/dashboard")
         return
@@ -75,8 +78,7 @@ export default function AdminLogin() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="text-2xl font-bold text-foreground flex items-baseline gap-3">
-              <span>TTTSL</span>
-              <span className="swanky-brand text-sm leading-none">swanky by ellery</span>
+              <span className="swanky-brand text-2xl">TWT</span>
             </Link>
             <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Back to Store
@@ -171,22 +173,22 @@ export default function AdminLogin() {
                   </div>
                 </div>
 
-                  <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 text-sm">
-                      <input
-                        type="checkbox"
-                        checked={rememberMe}
-                        onChange={(e) => setRememberMe(e.target.checked)}
-                        className="inline-block w-4 h-4 rounded border-border bg-background"
-                      />
-                      <span>Remember me</span>
-                    </label>
-                    <Link href="/auth/forgot" className="text-sm text-muted-foreground hover:underline">
-                      Forgot password?
-                    </Link>
-                  </div>
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center gap-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      className="inline-block w-4 h-4 rounded border-border bg-background"
+                    />
+                    <span>Remember me</span>
+                  </label>
+                  <Link href="/auth/forgot" className="text-sm text-muted-foreground hover:underline">
+                    Forgot password?
+                  </Link>
+                </div>
 
-                {error && <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md">{error}</div>}
+                {error && <div className="text-sm text-destructive bg-destructive/10 p-3 rounded-md border border-destructive/20">{error}</div>}
 
                 <Button type="submit" variant="swanky" className="w-full swanky-focus" disabled={isLoading}>
                   {isLoading ? "Signing in..." : "Sign In as Admin"}

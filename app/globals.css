@@ -4,34 +4,42 @@
 
 @layer base {
   :root {
-    /* Updated color palette for TWT brand - Elegant, brownish, premium aesthetic */
-    --background: oklch(0.98 0.01 60); /* Soft alabaster/cream #FAF8F5 */
-    --foreground: oklch(0.25 0.02 45); /* Deep rich brown #2C1E1A */
-    --card: oklch(0.99 0.005 60);
-    --card-foreground: oklch(0.25 0.02 45);
-    --popover: oklch(0.98 0.01 60);
-    --popover-foreground: oklch(0.25 0.02 45);
-    --primary: oklch(0.45 0.08 45); /* Elegant Walnut/Bronze #6B4F3B */
-    --primary-foreground: oklch(0.98 0.01 60);
-    --secondary: oklch(0.65 0.10 50); /* Golden Oak #A67C52 */
-    --secondary-foreground: oklch(0.98 0.01 60);
-    --muted: oklch(0.92 0.02 60); /* Soft sandstone #EBE5DC */
-    --muted-foreground: oklch(0.45 0.05 45);
-    --accent: oklch(0.75 0.15 85); /* Refined Gold #DDB669 */
-    --accent-foreground: oklch(0.25 0.02 45);
+    /* Updated color palette for TWT brand - Deep Brown & Cream Elegance */
+    --background: oklch(0.35 0.08 45);
+    /* Rich Dark Mocha #5C4033 */
+    --foreground: oklch(0.95 0.03 60);
+    /* Soft Cream Text #F2E9DE */
+    --card: oklch(0.40 0.08 45);
+    /* Slightly lighter brown for cards */
+    --card-foreground: oklch(0.95 0.03 60);
+    --popover: oklch(0.35 0.08 45);
+    --popover-foreground: oklch(0.95 0.03 60);
+    --primary: oklch(0.75 0.15 85);
+    /* Burnished Gold #CCAA66 */
+    --primary-foreground: oklch(0.20 0.02 45);
+    --secondary: oklch(0.60 0.10 50);
+    /* Golden Oak #9B7552 */
+    --secondary-foreground: oklch(0.95 0.03 60);
+    --muted: oklch(0.45 0.06 45);
+    /* Warm Charcoal Brown */
+    --muted-foreground: oklch(0.85 0.05 60);
+    --accent: oklch(0.75 0.15 85);
+    --accent-foreground: oklch(0.20 0.02 45);
     --destructive: oklch(0.50 0.15 30);
-    --destructive-foreground: oklch(0.98 0.01 60);
-    --border: oklch(0.88 0.02 60); /* Light taupe border */
+    --destructive-foreground: oklch(0.95 0.03 60);
+    --border: oklch(0.50 0.05 45);
+    /* Darker leather border */
     --input: oklch(0.95 0.01 60);
     --ring: oklch(0.45 0.08 45);
     --radius: 0.75rem;
-    
+
     --swanky-gold: #D4AF37;
     --swanky-gold-rgb: 212, 175, 55;
   }
 
   .dark {
-    --background: oklch(0.15 0.02 45); /* Very deep warm brown */
+    --background: oklch(0.15 0.02 45);
+    /* Very deep warm brown */
     --foreground: oklch(0.95 0.01 60);
     --card: oklch(0.18 0.02 45);
     --card-foreground: oklch(0.95 0.01 60);
@@ -57,6 +65,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -69,10 +78,12 @@
   letter-spacing: 0.01em;
   display: inline-block;
   /* Make the brush-script signature a little larger for better legibility */
-  font-size: 1.125rem; /* ~18px on a 16px root */
+  font-size: 1.125rem;
+  /* ~18px on a 16px root */
   line-height: 1;
   vertical-align: baseline;
-  transform: translateY(-1px); /* slight visual lift to align with TTTSL text */
+  transform: translateY(-1px);
+  /* slight visual lift to align with TTTSL text */
   transition: font-size 150ms ease, transform 150ms ease, text-shadow 150ms ease;
   -webkit-font-smoothing: antialiased;
 }
@@ -80,28 +91,30 @@
 /* Dark mode: subtle shadow to improve contrast on darker backgrounds */
 .dark .swanky-brand {
   color: var(--swanky-gold);
-  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 }
 
 /* Respect system dark mode as well (for environments that don't use .dark class) */
 @media (prefers-color-scheme: dark) {
   .swanky-brand {
     color: var(--swanky-gold);
-    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
   }
 }
 
 /* Responsive adjustments: slightly smaller on small screens, a touch larger on wide screens */
 @media (max-width: 640px) {
   .swanky-brand {
-    font-size: 1rem; /* ~16px on mobile */
+    font-size: 1rem;
+    /* ~16px on mobile */
     transform: translateY(0);
   }
 }
 
 @media (min-width: 1024px) {
   .swanky-brand {
-    font-size: 1.25rem; /* slightly larger on large screens */
+    font-size: 1.25rem;
+    /* slightly larger on large screens */
     transform: translateY(-1px);
   }
 }
@@ -139,6 +152,7 @@
   color: inherit;
   transition: color 150ms ease, text-decoration-color 150ms ease;
 }
+
 .swanky-link:hover,
 .swanky-link:focus-visible {
   color: var(--swanky-gold);

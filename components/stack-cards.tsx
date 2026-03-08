@@ -124,7 +124,7 @@ export default function StackCards() {
                       handleNext();
                     }
                   }}
-                  className="absolute w-full h-[500px] bg-background rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                  className="absolute w-full h-[500px] bg-card rounded-2xl overflow-hidden shadow-2xl border border-border/50"
                 >
                   <div className="relative h-3/4 w-full">
                     <img
@@ -135,7 +135,7 @@ export default function StackCards() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
 
-                  <div className="h-1/4 p-6 flex flex-col justify-between bg-background">
+                  <div className="h-1/4 p-6 flex flex-col justify-between bg-card">
                     <div>
                       <h3 className="text-2xl font-light tracking-tight mb-1">{card.name}</h3>
                       <p className="text-sm text-muted-foreground line-clamp-2">{card.description || "Experience the essence of style."}</p>

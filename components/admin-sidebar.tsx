@@ -62,7 +62,7 @@ export function AdminSidebar({ className, onLogout, ...props }: SidebarProps) {
             <div className="space-y-4 py-4">
                 <div className="px-3 py-2">
                     <div className="flex items-center gap-2 px-4 mb-10">
-                        <span className="text-2xl font-light tracking-[0.2em]">TTTSL</span>
+                        <span className="swanky-brand text-2xl tracking-[0.2em] text-foreground">TWT</span>
                         <span className="text-[10px] uppercase tracking-widest font-bold text-primary px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20">Admin</span>
                     </div>
                     <div className="space-y-1">
@@ -88,7 +88,7 @@ export function AdminSidebar({ className, onLogout, ...props }: SidebarProps) {
                 </div>
                 <div className="px-3 py-2 mt-auto">
                     <div className="space-y-1">
-                        <Button variant="ghost" className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50" onClick={onLogout}>
+                        <Button variant="ghost" className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10" onClick={onLogout}>
                             <LogOut className="mr-2 h-4 w-4" />
                             Logout
                         </Button>
